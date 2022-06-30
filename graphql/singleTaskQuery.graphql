@@ -1,0 +1,11 @@
+query singleTask($id: ID!) {
+  Task(where: { id: $id }) {
+    id
+    title
+    description
+    section {
+      name
+      id
+    }
+  }
+}

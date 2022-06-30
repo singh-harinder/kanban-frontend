@@ -1,0 +1,6 @@
+mutation createTask($title: String!, $description: String!, $id: ID!) {
+  createTask(data: { title: $title, description: $description, section: { connect: { id: $id } } }) {
+    id
+    title
+  }
+}

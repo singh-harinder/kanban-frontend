@@ -1,0 +1,15 @@
+query singleBoard($id: ID!) {
+  Board(where: { id: $id }) {
+    id
+    name
+    section {
+      id
+      name
+      tasks {
+        id
+        title
+        description
+      }
+    }
+  }
+}

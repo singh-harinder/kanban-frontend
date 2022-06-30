@@ -1,0 +1,15 @@
+query Sections {
+  allSections {
+    id
+    name
+    board {
+      id
+      name
+    }
+    tasks {
+      id
+      title
+      description
+    }
+  }
+}

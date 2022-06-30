@@ -1,0 +1,6 @@
+mutation updateTask($id: ID!, $title: String, $description: String, $sectionID: ID!) {
+  updateTask(id: $id, data: { title: $title, description: $description, section: { connect: { id: $sectionID } } }) {
+    id
+    title
+  }
+}

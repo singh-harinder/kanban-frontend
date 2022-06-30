@@ -1,0 +1,13 @@
+query Boards {
+  allBoards {
+    id
+    name
+    section {
+      id
+      name
+      tasks {
+        id
+      }
+    }
+  }
+}

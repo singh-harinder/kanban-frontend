@@ -1,0 +1,6 @@
+mutation createSection($name: String!, $board: ID!) {
+  createSection(data: { name: $name, board: { connect: { id: $board } } }) {
+    id
+    name
+  }
+}

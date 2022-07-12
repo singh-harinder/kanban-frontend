@@ -34,7 +34,7 @@ function SingleBoard(board: BoardProps) {
         <p className="flex cursor-pointer justify-center border-b-4 border-b-slate-700 p-4">{board.board?.name}</p>
       </Link>
       <div className="mt-10 mb-10 p-4">
-        {board.board?.section.map((section) => (
+        {board.board?.section!.map((section) => (
           <div className="p-2" key={section.id}>
             {section.name}
           </div>

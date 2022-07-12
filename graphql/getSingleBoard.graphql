@@ -1,5 +1,5 @@
 query singleBoard($id: ID!) {
-  Board(where: { id: $id }) {
+  board(where: { id: $id }) {
     id
     name
     section {

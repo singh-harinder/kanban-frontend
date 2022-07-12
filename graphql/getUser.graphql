@@ -4,6 +4,17 @@ query User {
       id
       name
       email
+      board {
+        id
+        name
+        section {
+          id
+          name
+          tasks {
+            id
+          }
+        }
+      }
     }
   }
 }

@@ -10,110 +10,130 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
 };
 
 export type AuthenticatedItem = User;
 
-/**  A keystone list  */
 export type Board = {
   __typename?: "Board";
-  _sectionMeta?: Maybe<_QueryMeta>;
   id: Scalars["ID"];
   name?: Maybe<Scalars["String"]>;
-  section: Array<Section>;
+  section?: Maybe<Array<Section>>;
+  sectionCount?: Maybe<Scalars["Int"]>;
+  user?: Maybe<User>;
 };
 
-/**  A keystone list  */
-export type Board_SectionMetaArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortSectionsBy>>;
-  where?: InputMaybe<SectionWhereInput>;
-};
-
-/**  A keystone list  */
 export type BoardSectionArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortSectionsBy>>;
-  where?: InputMaybe<SectionWhereInput>;
+  orderBy?: Array<SectionOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: SectionWhereInput;
+};
+
+export type BoardSectionCountArgs = {
+  where?: SectionWhereInput;
 };
 
 export type BoardCreateInput = {
   name?: InputMaybe<Scalars["String"]>;
-  section?: InputMaybe<SectionRelateToManyInput>;
+  section?: InputMaybe<SectionRelateToManyForCreateInput>;
+  user?: InputMaybe<UserRelateToOneForCreateInput>;
 };
 
-export type BoardRelateToOneInput = {
+export type BoardManyRelationFilter = {
+  every?: InputMaybe<BoardWhereInput>;
+  none?: InputMaybe<BoardWhereInput>;
+  some?: InputMaybe<BoardWhereInput>;
+};
+
+export type BoardOrderByInput = {
+  id?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+};
+
+export type BoardRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<BoardWhereUniqueInput>>;
+  create?: InputMaybe<Array<BoardCreateInput>>;
+};
+
+export type BoardRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<BoardWhereUniqueInput>>;
+  create?: InputMaybe<Array<BoardCreateInput>>;
+  disconnect?: InputMaybe<Array<BoardWhereUniqueInput>>;
+  set?: InputMaybe<Array<BoardWhereUniqueInput>>;
+};
+
+export type BoardRelateToOneForCreateInput = {
   connect?: InputMaybe<BoardWhereUniqueInput>;
   create?: InputMaybe<BoardCreateInput>;
-  disconnect?: InputMaybe<BoardWhereUniqueInput>;
-  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type BoardRelateToOneForUpdateInput = {
+  connect?: InputMaybe<BoardWhereUniqueInput>;
+  create?: InputMaybe<BoardCreateInput>;
+  disconnect?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type BoardUpdateArgs = {
+  data: BoardUpdateInput;
+  where: BoardWhereUniqueInput;
 };
 
 export type BoardUpdateInput = {
   name?: InputMaybe<Scalars["String"]>;
-  section?: InputMaybe<SectionRelateToManyInput>;
+  section?: InputMaybe<SectionRelateToManyForUpdateInput>;
+  user?: InputMaybe<UserRelateToOneForUpdateInput>;
 };
 
 export type BoardWhereInput = {
-  AND?: InputMaybe<Array<InputMaybe<BoardWhereInput>>>;
-  OR?: InputMaybe<Array<InputMaybe<BoardWhereInput>>>;
-  id?: InputMaybe<Scalars["ID"]>;
-  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  id_not?: InputMaybe<Scalars["ID"]>;
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  name?: InputMaybe<Scalars["String"]>;
-  name_contains?: InputMaybe<Scalars["String"]>;
-  name_contains_i?: InputMaybe<Scalars["String"]>;
-  name_ends_with?: InputMaybe<Scalars["String"]>;
-  name_ends_with_i?: InputMaybe<Scalars["String"]>;
-  name_i?: InputMaybe<Scalars["String"]>;
-  name_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  name_not?: InputMaybe<Scalars["String"]>;
-  name_not_contains?: InputMaybe<Scalars["String"]>;
-  name_not_contains_i?: InputMaybe<Scalars["String"]>;
-  name_not_ends_with?: InputMaybe<Scalars["String"]>;
-  name_not_ends_with_i?: InputMaybe<Scalars["String"]>;
-  name_not_i?: InputMaybe<Scalars["String"]>;
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  name_not_starts_with?: InputMaybe<Scalars["String"]>;
-  name_not_starts_with_i?: InputMaybe<Scalars["String"]>;
-  name_starts_with?: InputMaybe<Scalars["String"]>;
-  name_starts_with_i?: InputMaybe<Scalars["String"]>;
-  /**  condition must be true for all nodes  */
-  section_every?: InputMaybe<SectionWhereInput>;
-  /**  condition must be false for all nodes  */
-  section_none?: InputMaybe<SectionWhereInput>;
-  /**  condition must be true for at least 1 node  */
-  section_some?: InputMaybe<SectionWhereInput>;
+  AND?: InputMaybe<Array<BoardWhereInput>>;
+  NOT?: InputMaybe<Array<BoardWhereInput>>;
+  OR?: InputMaybe<Array<BoardWhereInput>>;
+  id?: InputMaybe<IdFilter>;
+  name?: InputMaybe<StringFilter>;
+  section?: InputMaybe<SectionManyRelationFilter>;
+  user?: InputMaybe<UserWhereInput>;
 };
 
 export type BoardWhereUniqueInput = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
+  name?: InputMaybe<Scalars["String"]>;
 };
 
-export type BoardsCreateInput = {
-  data?: InputMaybe<BoardCreateInput>;
-};
-
-export type BoardsUpdateInput = {
-  data?: InputMaybe<BoardUpdateInput>;
-  id: Scalars["ID"];
+export type BooleanFilter = {
+  equals?: InputMaybe<Scalars["Boolean"]>;
+  not?: InputMaybe<BooleanFilter>;
 };
 
 export type CreateInitialUserInput = {
   email?: InputMaybe<Scalars["String"]>;
   name?: InputMaybe<Scalars["String"]>;
   password?: InputMaybe<Scalars["String"]>;
+};
+
+export type DateTimeNullableFilter = {
+  equals?: InputMaybe<Scalars["DateTime"]>;
+  gt?: InputMaybe<Scalars["DateTime"]>;
+  gte?: InputMaybe<Scalars["DateTime"]>;
+  in?: InputMaybe<Array<Scalars["DateTime"]>>;
+  lt?: InputMaybe<Scalars["DateTime"]>;
+  lte?: InputMaybe<Scalars["DateTime"]>;
+  not?: InputMaybe<DateTimeNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars["DateTime"]>>;
+};
+
+export type IdFilter = {
+  equals?: InputMaybe<Scalars["ID"]>;
+  gt?: InputMaybe<Scalars["ID"]>;
+  gte?: InputMaybe<Scalars["ID"]>;
+  in?: InputMaybe<Array<Scalars["ID"]>>;
+  lt?: InputMaybe<Scalars["ID"]>;
+  lte?: InputMaybe<Scalars["ID"]>;
+  not?: InputMaybe<IdFilter>;
+  notIn?: InputMaybe<Array<Scalars["ID"]>>;
 };
 
 export type KeystoneAdminMeta = {
@@ -131,18 +151,21 @@ export type KeystoneAdminMetaListArgs = {
 export type KeystoneAdminUiFieldMeta = {
   __typename?: "KeystoneAdminUIFieldMeta";
   createView: KeystoneAdminUiFieldMetaCreateView;
-  customViewsHash?: Maybe<Scalars["String"]>;
+  customViewsIndex?: Maybe<Scalars["Int"]>;
+  description?: Maybe<Scalars["String"]>;
   fieldMeta?: Maybe<Scalars["JSON"]>;
+  isFilterable: Scalars["Boolean"];
   isOrderable: Scalars["Boolean"];
   itemView?: Maybe<KeystoneAdminUiFieldMetaItemView>;
   label: Scalars["String"];
   listView: KeystoneAdminUiFieldMetaListView;
   path: Scalars["String"];
-  viewsHash: Scalars["String"];
+  search?: Maybe<QueryMode>;
+  viewsIndex: Scalars["Int"];
 };
 
 export type KeystoneAdminUiFieldMetaItemViewArgs = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
 };
 
 export type KeystoneAdminUiFieldMetaCreateView = {
@@ -157,7 +180,7 @@ export enum KeystoneAdminUiFieldMetaCreateViewFieldMode {
 
 export type KeystoneAdminUiFieldMetaItemView = {
   __typename?: "KeystoneAdminUIFieldMetaItemView";
-  fieldMode: KeystoneAdminUiFieldMetaItemViewFieldMode;
+  fieldMode?: Maybe<KeystoneAdminUiFieldMetaItemViewFieldMode>;
 };
 
 export enum KeystoneAdminUiFieldMetaItemViewFieldMode {
@@ -212,58 +235,124 @@ export type KeystoneMeta = {
   adminMeta: KeystoneAdminMeta;
 };
 
+export type Member = {
+  __typename?: "Member";
+  email?: Maybe<Scalars["String"]>;
+  id: Scalars["ID"];
+  leader?: Maybe<User>;
+  name?: Maybe<Scalars["String"]>;
+  password?: Maybe<PasswordState>;
+  tasks?: Maybe<Array<Task>>;
+  tasksCount?: Maybe<Scalars["Int"]>;
+};
+
+export type MemberTasksArgs = {
+  orderBy?: Array<TaskOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: TaskWhereInput;
+};
+
+export type MemberTasksCountArgs = {
+  where?: TaskWhereInput;
+};
+
+export type MemberCreateInput = {
+  email?: InputMaybe<Scalars["String"]>;
+  leader?: InputMaybe<UserRelateToOneForCreateInput>;
+  name?: InputMaybe<Scalars["String"]>;
+  password?: InputMaybe<Scalars["String"]>;
+  tasks?: InputMaybe<TaskRelateToManyForCreateInput>;
+};
+
+export type MemberManyRelationFilter = {
+  every?: InputMaybe<MemberWhereInput>;
+  none?: InputMaybe<MemberWhereInput>;
+  some?: InputMaybe<MemberWhereInput>;
+};
+
+export type MemberOrderByInput = {
+  email?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+};
+
+export type MemberRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<MemberWhereUniqueInput>>;
+  create?: InputMaybe<Array<MemberCreateInput>>;
+};
+
+export type MemberRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<MemberWhereUniqueInput>>;
+  create?: InputMaybe<Array<MemberCreateInput>>;
+  disconnect?: InputMaybe<Array<MemberWhereUniqueInput>>;
+  set?: InputMaybe<Array<MemberWhereUniqueInput>>;
+};
+
+export type MemberUpdateArgs = {
+  data: MemberUpdateInput;
+  where: MemberWhereUniqueInput;
+};
+
+export type MemberUpdateInput = {
+  email?: InputMaybe<Scalars["String"]>;
+  leader?: InputMaybe<UserRelateToOneForUpdateInput>;
+  name?: InputMaybe<Scalars["String"]>;
+  password?: InputMaybe<Scalars["String"]>;
+  tasks?: InputMaybe<TaskRelateToManyForUpdateInput>;
+};
+
+export type MemberWhereInput = {
+  AND?: InputMaybe<Array<MemberWhereInput>>;
+  NOT?: InputMaybe<Array<MemberWhereInput>>;
+  OR?: InputMaybe<Array<MemberWhereInput>>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  leader?: InputMaybe<UserWhereInput>;
+  name?: InputMaybe<StringFilter>;
+  password?: InputMaybe<PasswordFilter>;
+  tasks?: InputMaybe<TaskManyRelationFilter>;
+};
+
+export type MemberWhereUniqueInput = {
+  email?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
 export type Mutation = {
   __typename?: "Mutation";
-  authenticateUserWithPassword: UserAuthenticationWithPasswordResult;
-  /**  Create a single Board item.  */
+  authenticateUserWithPassword?: Maybe<UserAuthenticationWithPasswordResult>;
   createBoard?: Maybe<Board>;
-  /**  Create multiple Board items.  */
   createBoards?: Maybe<Array<Maybe<Board>>>;
   createInitialUser: UserAuthenticationWithPasswordSuccess;
-  /**  Create a single Section item.  */
+  createMember?: Maybe<Member>;
+  createMembers?: Maybe<Array<Maybe<Member>>>;
   createSection?: Maybe<Section>;
-  /**  Create multiple Section items.  */
   createSections?: Maybe<Array<Maybe<Section>>>;
-  /**  Create a single Task item.  */
   createTask?: Maybe<Task>;
-  /**  Create multiple Task items.  */
   createTasks?: Maybe<Array<Maybe<Task>>>;
-  /**  Create a single User item.  */
   createUser?: Maybe<User>;
-  /**  Create multiple User items.  */
   createUsers?: Maybe<Array<Maybe<User>>>;
-  /**  Delete a single Board item by ID.  */
   deleteBoard?: Maybe<Board>;
-  /**  Delete multiple Board items by ID.  */
   deleteBoards?: Maybe<Array<Maybe<Board>>>;
-  /**  Delete a single Section item by ID.  */
+  deleteMember?: Maybe<Member>;
+  deleteMembers?: Maybe<Array<Maybe<Member>>>;
   deleteSection?: Maybe<Section>;
-  /**  Delete multiple Section items by ID.  */
   deleteSections?: Maybe<Array<Maybe<Section>>>;
-  /**  Delete a single Task item by ID.  */
   deleteTask?: Maybe<Task>;
-  /**  Delete multiple Task items by ID.  */
   deleteTasks?: Maybe<Array<Maybe<Task>>>;
-  /**  Delete a single User item by ID.  */
   deleteUser?: Maybe<User>;
-  /**  Delete multiple User items by ID.  */
   deleteUsers?: Maybe<Array<Maybe<User>>>;
   endSession: Scalars["Boolean"];
-  /**  Update a single Board item by ID.  */
   updateBoard?: Maybe<Board>;
-  /**  Update multiple Board items by ID.  */
   updateBoards?: Maybe<Array<Maybe<Board>>>;
-  /**  Update a single Section item by ID.  */
+  updateMember?: Maybe<Member>;
+  updateMembers?: Maybe<Array<Maybe<Member>>>;
   updateSection?: Maybe<Section>;
-  /**  Update multiple Section items by ID.  */
   updateSections?: Maybe<Array<Maybe<Section>>>;
-  /**  Update a single Task item by ID.  */
   updateTask?: Maybe<Task>;
-  /**  Update multiple Task items by ID.  */
   updateTasks?: Maybe<Array<Maybe<Task>>>;
-  /**  Update a single User item by ID.  */
   updateUser?: Maybe<User>;
-  /**  Update multiple User items by ID.  */
   updateUsers?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -273,512 +362,509 @@ export type MutationAuthenticateUserWithPasswordArgs = {
 };
 
 export type MutationCreateBoardArgs = {
-  data?: InputMaybe<BoardCreateInput>;
+  data: BoardCreateInput;
 };
 
 export type MutationCreateBoardsArgs = {
-  data?: InputMaybe<Array<InputMaybe<BoardsCreateInput>>>;
+  data: Array<BoardCreateInput>;
 };
 
 export type MutationCreateInitialUserArgs = {
   data: CreateInitialUserInput;
 };
 
+export type MutationCreateMemberArgs = {
+  data: MemberCreateInput;
+};
+
+export type MutationCreateMembersArgs = {
+  data: Array<MemberCreateInput>;
+};
+
 export type MutationCreateSectionArgs = {
-  data?: InputMaybe<SectionCreateInput>;
+  data: SectionCreateInput;
 };
 
 export type MutationCreateSectionsArgs = {
-  data?: InputMaybe<Array<InputMaybe<SectionsCreateInput>>>;
+  data: Array<SectionCreateInput>;
 };
 
 export type MutationCreateTaskArgs = {
-  data?: InputMaybe<TaskCreateInput>;
+  data: TaskCreateInput;
 };
 
 export type MutationCreateTasksArgs = {
-  data?: InputMaybe<Array<InputMaybe<TasksCreateInput>>>;
+  data: Array<TaskCreateInput>;
 };
 
 export type MutationCreateUserArgs = {
-  data?: InputMaybe<UserCreateInput>;
+  data: UserCreateInput;
 };
 
 export type MutationCreateUsersArgs = {
-  data?: InputMaybe<Array<InputMaybe<UsersCreateInput>>>;
+  data: Array<UserCreateInput>;
 };
 
 export type MutationDeleteBoardArgs = {
-  id: Scalars["ID"];
+  where: BoardWhereUniqueInput;
 };
 
 export type MutationDeleteBoardsArgs = {
-  ids?: InputMaybe<Array<Scalars["ID"]>>;
+  where: Array<BoardWhereUniqueInput>;
+};
+
+export type MutationDeleteMemberArgs = {
+  where: MemberWhereUniqueInput;
+};
+
+export type MutationDeleteMembersArgs = {
+  where: Array<MemberWhereUniqueInput>;
 };
 
 export type MutationDeleteSectionArgs = {
-  id: Scalars["ID"];
+  where: SectionWhereUniqueInput;
 };
 
 export type MutationDeleteSectionsArgs = {
-  ids?: InputMaybe<Array<Scalars["ID"]>>;
+  where: Array<SectionWhereUniqueInput>;
 };
 
 export type MutationDeleteTaskArgs = {
-  id: Scalars["ID"];
+  where: TaskWhereUniqueInput;
 };
 
 export type MutationDeleteTasksArgs = {
-  ids?: InputMaybe<Array<Scalars["ID"]>>;
+  where: Array<TaskWhereUniqueInput>;
 };
 
 export type MutationDeleteUserArgs = {
-  id: Scalars["ID"];
+  where: UserWhereUniqueInput;
 };
 
 export type MutationDeleteUsersArgs = {
-  ids?: InputMaybe<Array<Scalars["ID"]>>;
+  where: Array<UserWhereUniqueInput>;
 };
 
 export type MutationUpdateBoardArgs = {
-  data?: InputMaybe<BoardUpdateInput>;
-  id: Scalars["ID"];
+  data: BoardUpdateInput;
+  where: BoardWhereUniqueInput;
 };
 
 export type MutationUpdateBoardsArgs = {
-  data?: InputMaybe<Array<InputMaybe<BoardsUpdateInput>>>;
+  data: Array<BoardUpdateArgs>;
+};
+
+export type MutationUpdateMemberArgs = {
+  data: MemberUpdateInput;
+  where: MemberWhereUniqueInput;
+};
+
+export type MutationUpdateMembersArgs = {
+  data: Array<MemberUpdateArgs>;
 };
 
 export type MutationUpdateSectionArgs = {
-  data?: InputMaybe<SectionUpdateInput>;
-  id: Scalars["ID"];
+  data: SectionUpdateInput;
+  where: SectionWhereUniqueInput;
 };
 
 export type MutationUpdateSectionsArgs = {
-  data?: InputMaybe<Array<InputMaybe<SectionsUpdateInput>>>;
+  data: Array<SectionUpdateArgs>;
 };
 
 export type MutationUpdateTaskArgs = {
-  data?: InputMaybe<TaskUpdateInput>;
-  id: Scalars["ID"];
+  data: TaskUpdateInput;
+  where: TaskWhereUniqueInput;
 };
 
 export type MutationUpdateTasksArgs = {
-  data?: InputMaybe<Array<InputMaybe<TasksUpdateInput>>>;
+  data: Array<TaskUpdateArgs>;
 };
 
 export type MutationUpdateUserArgs = {
-  data?: InputMaybe<UserUpdateInput>;
-  id: Scalars["ID"];
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
 };
 
 export type MutationUpdateUsersArgs = {
-  data?: InputMaybe<Array<InputMaybe<UsersUpdateInput>>>;
+  data: Array<UserUpdateArgs>;
 };
 
-export enum PasswordAuthErrorCode {
-  Failure = "FAILURE",
-  IdentityNotFound = "IDENTITY_NOT_FOUND",
-  MultipleIdentityMatches = "MULTIPLE_IDENTITY_MATCHES",
-  SecretMismatch = "SECRET_MISMATCH",
-  SecretNotSet = "SECRET_NOT_SET",
+export type NestedStringFilter = {
+  contains?: InputMaybe<Scalars["String"]>;
+  endsWith?: InputMaybe<Scalars["String"]>;
+  equals?: InputMaybe<Scalars["String"]>;
+  gt?: InputMaybe<Scalars["String"]>;
+  gte?: InputMaybe<Scalars["String"]>;
+  in?: InputMaybe<Array<Scalars["String"]>>;
+  lt?: InputMaybe<Scalars["String"]>;
+  lte?: InputMaybe<Scalars["String"]>;
+  not?: InputMaybe<NestedStringFilter>;
+  notIn?: InputMaybe<Array<Scalars["String"]>>;
+  startsWith?: InputMaybe<Scalars["String"]>;
+};
+
+export enum OrderDirection {
+  Asc = "asc",
+  Desc = "desc",
 }
+
+export type PasswordFilter = {
+  isSet: Scalars["Boolean"];
+};
+
+export type PasswordState = {
+  __typename?: "PasswordState";
+  isSet: Scalars["Boolean"];
+};
 
 export type Query = {
   __typename?: "Query";
-  /**  Search for the Board item with the matching ID.  */
-  Board?: Maybe<Board>;
-  /**  Search for the Section item with the matching ID.  */
-  Section?: Maybe<Section>;
-  /**  Search for the Task item with the matching ID.  */
-  Task?: Maybe<Task>;
-  /**  Search for the User item with the matching ID.  */
-  User?: Maybe<User>;
-  /**  Retrieve the meta-data for the Board list.  */
-  _BoardsMeta?: Maybe<_ListMeta>;
-  /**  Retrieve the meta-data for the Section list.  */
-  _SectionsMeta?: Maybe<_ListMeta>;
-  /**  Retrieve the meta-data for the Task list.  */
-  _TasksMeta?: Maybe<_ListMeta>;
-  /**  Retrieve the meta-data for the User list.  */
-  _UsersMeta?: Maybe<_ListMeta>;
-  /**  Perform a meta-query on all Board items which match the where clause.  */
-  _allBoardsMeta?: Maybe<_QueryMeta>;
-  /**  Perform a meta-query on all Section items which match the where clause.  */
-  _allSectionsMeta?: Maybe<_QueryMeta>;
-  /**  Perform a meta-query on all Task items which match the where clause.  */
-  _allTasksMeta?: Maybe<_QueryMeta>;
-  /**  Perform a meta-query on all User items which match the where clause.  */
-  _allUsersMeta?: Maybe<_QueryMeta>;
-  /**  Retrieve the meta-data for all lists.  */
-  _ksListsMeta?: Maybe<Array<Maybe<_ListMeta>>>;
-  /**  Search for all Board items which match the where clause.  */
-  allBoards?: Maybe<Array<Maybe<Board>>>;
-  /**  Search for all Section items which match the where clause.  */
-  allSections?: Maybe<Array<Maybe<Section>>>;
-  /**  Search for all Task items which match the where clause.  */
-  allTasks?: Maybe<Array<Maybe<Task>>>;
-  /**  Search for all User items which match the where clause.  */
-  allUsers?: Maybe<Array<Maybe<User>>>;
-  /** The version of the Keystone application serving this API. */
-  appVersion?: Maybe<Scalars["String"]>;
   authenticatedItem?: Maybe<AuthenticatedItem>;
+  board?: Maybe<Board>;
+  boards?: Maybe<Array<Board>>;
+  boardsCount?: Maybe<Scalars["Int"]>;
   keystone: KeystoneMeta;
+  member?: Maybe<Member>;
+  members?: Maybe<Array<Member>>;
+  membersCount?: Maybe<Scalars["Int"]>;
+  section?: Maybe<Section>;
+  sections?: Maybe<Array<Section>>;
+  sectionsCount?: Maybe<Scalars["Int"]>;
+  task?: Maybe<Task>;
+  tasks?: Maybe<Array<Task>>;
+  tasksCount?: Maybe<Scalars["Int"]>;
+  user?: Maybe<User>;
+  users?: Maybe<Array<User>>;
+  usersCount?: Maybe<Scalars["Int"]>;
 };
 
 export type QueryBoardArgs = {
   where: BoardWhereUniqueInput;
 };
 
+export type QueryBoardsArgs = {
+  orderBy?: Array<BoardOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: BoardWhereInput;
+};
+
+export type QueryBoardsCountArgs = {
+  where?: BoardWhereInput;
+};
+
+export type QueryMemberArgs = {
+  where: MemberWhereUniqueInput;
+};
+
+export type QueryMembersArgs = {
+  orderBy?: Array<MemberOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: MemberWhereInput;
+};
+
+export type QueryMembersCountArgs = {
+  where?: MemberWhereInput;
+};
+
 export type QuerySectionArgs = {
   where: SectionWhereUniqueInput;
+};
+
+export type QuerySectionsArgs = {
+  orderBy?: Array<SectionOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: SectionWhereInput;
+};
+
+export type QuerySectionsCountArgs = {
+  where?: SectionWhereInput;
 };
 
 export type QueryTaskArgs = {
   where: TaskWhereUniqueInput;
 };
 
+export type QueryTasksArgs = {
+  orderBy?: Array<TaskOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: TaskWhereInput;
+};
+
+export type QueryTasksCountArgs = {
+  where?: TaskWhereInput;
+};
+
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
 
-export type Query_AllBoardsMetaArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortBoardsBy>>;
-  where?: InputMaybe<BoardWhereInput>;
+export type QueryUsersArgs = {
+  orderBy?: Array<UserOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: UserWhereInput;
 };
 
-export type Query_AllSectionsMetaArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortSectionsBy>>;
-  where?: InputMaybe<SectionWhereInput>;
+export type QueryUsersCountArgs = {
+  where?: UserWhereInput;
 };
 
-export type Query_AllTasksMetaArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortTasksBy>>;
-  where?: InputMaybe<TaskWhereInput>;
-};
+export enum QueryMode {
+  Default = "default",
+  Insensitive = "insensitive",
+}
 
-export type Query_AllUsersMetaArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortUsersBy>>;
-  where?: InputMaybe<UserWhereInput>;
-};
-
-export type Query_KsListsMetaArgs = {
-  where?: InputMaybe<_KsListsMetaInput>;
-};
-
-export type QueryAllBoardsArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortBoardsBy>>;
-  where?: InputMaybe<BoardWhereInput>;
-};
-
-export type QueryAllSectionsArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortSectionsBy>>;
-  where?: InputMaybe<SectionWhereInput>;
-};
-
-export type QueryAllTasksArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortTasksBy>>;
-  where?: InputMaybe<TaskWhereInput>;
-};
-
-export type QueryAllUsersArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortUsersBy>>;
-  where?: InputMaybe<UserWhereInput>;
-};
-
-/**  A keystone list  */
 export type Section = {
   __typename?: "Section";
-  _tasksMeta?: Maybe<_QueryMeta>;
   board?: Maybe<Board>;
   id: Scalars["ID"];
   name?: Maybe<Scalars["String"]>;
-  tasks: Array<Task>;
+  tasks?: Maybe<Array<Task>>;
+  tasksCount?: Maybe<Scalars["Int"]>;
 };
 
-/**  A keystone list  */
-export type Section_TasksMetaArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortTasksBy>>;
-  where?: InputMaybe<TaskWhereInput>;
-};
-
-/**  A keystone list  */
 export type SectionTasksArgs = {
-  first?: InputMaybe<Scalars["Int"]>;
-  orderBy?: InputMaybe<Scalars["String"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  skip?: InputMaybe<Scalars["Int"]>;
-  sortBy?: InputMaybe<Array<SortTasksBy>>;
-  where?: InputMaybe<TaskWhereInput>;
+  orderBy?: Array<TaskOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: TaskWhereInput;
+};
+
+export type SectionTasksCountArgs = {
+  where?: TaskWhereInput;
 };
 
 export type SectionCreateInput = {
-  board?: InputMaybe<BoardRelateToOneInput>;
+  board?: InputMaybe<BoardRelateToOneForCreateInput>;
   name?: InputMaybe<Scalars["String"]>;
-  tasks?: InputMaybe<TaskRelateToManyInput>;
+  tasks?: InputMaybe<TaskRelateToManyForCreateInput>;
 };
 
-export type SectionRelateToManyInput = {
-  connect?: InputMaybe<Array<InputMaybe<SectionWhereUniqueInput>>>;
-  create?: InputMaybe<Array<InputMaybe<SectionCreateInput>>>;
-  disconnect?: InputMaybe<Array<InputMaybe<SectionWhereUniqueInput>>>;
-  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+export type SectionManyRelationFilter = {
+  every?: InputMaybe<SectionWhereInput>;
+  none?: InputMaybe<SectionWhereInput>;
+  some?: InputMaybe<SectionWhereInput>;
 };
 
-export type SectionRelateToOneInput = {
+export type SectionOrderByInput = {
+  id?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+};
+
+export type SectionRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<SectionWhereUniqueInput>>;
+  create?: InputMaybe<Array<SectionCreateInput>>;
+};
+
+export type SectionRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<SectionWhereUniqueInput>>;
+  create?: InputMaybe<Array<SectionCreateInput>>;
+  disconnect?: InputMaybe<Array<SectionWhereUniqueInput>>;
+  set?: InputMaybe<Array<SectionWhereUniqueInput>>;
+};
+
+export type SectionRelateToOneForCreateInput = {
   connect?: InputMaybe<SectionWhereUniqueInput>;
   create?: InputMaybe<SectionCreateInput>;
-  disconnect?: InputMaybe<SectionWhereUniqueInput>;
-  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type SectionRelateToOneForUpdateInput = {
+  connect?: InputMaybe<SectionWhereUniqueInput>;
+  create?: InputMaybe<SectionCreateInput>;
+  disconnect?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type SectionUpdateArgs = {
+  data: SectionUpdateInput;
+  where: SectionWhereUniqueInput;
 };
 
 export type SectionUpdateInput = {
-  board?: InputMaybe<BoardRelateToOneInput>;
+  board?: InputMaybe<BoardRelateToOneForUpdateInput>;
   name?: InputMaybe<Scalars["String"]>;
-  tasks?: InputMaybe<TaskRelateToManyInput>;
+  tasks?: InputMaybe<TaskRelateToManyForUpdateInput>;
 };
 
 export type SectionWhereInput = {
-  AND?: InputMaybe<Array<InputMaybe<SectionWhereInput>>>;
-  OR?: InputMaybe<Array<InputMaybe<SectionWhereInput>>>;
+  AND?: InputMaybe<Array<SectionWhereInput>>;
+  NOT?: InputMaybe<Array<SectionWhereInput>>;
+  OR?: InputMaybe<Array<SectionWhereInput>>;
   board?: InputMaybe<BoardWhereInput>;
-  board_is_null?: InputMaybe<Scalars["Boolean"]>;
-  id?: InputMaybe<Scalars["ID"]>;
-  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  id_not?: InputMaybe<Scalars["ID"]>;
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  name?: InputMaybe<Scalars["String"]>;
-  name_contains?: InputMaybe<Scalars["String"]>;
-  name_contains_i?: InputMaybe<Scalars["String"]>;
-  name_ends_with?: InputMaybe<Scalars["String"]>;
-  name_ends_with_i?: InputMaybe<Scalars["String"]>;
-  name_i?: InputMaybe<Scalars["String"]>;
-  name_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  name_not?: InputMaybe<Scalars["String"]>;
-  name_not_contains?: InputMaybe<Scalars["String"]>;
-  name_not_contains_i?: InputMaybe<Scalars["String"]>;
-  name_not_ends_with?: InputMaybe<Scalars["String"]>;
-  name_not_ends_with_i?: InputMaybe<Scalars["String"]>;
-  name_not_i?: InputMaybe<Scalars["String"]>;
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  name_not_starts_with?: InputMaybe<Scalars["String"]>;
-  name_not_starts_with_i?: InputMaybe<Scalars["String"]>;
-  name_starts_with?: InputMaybe<Scalars["String"]>;
-  name_starts_with_i?: InputMaybe<Scalars["String"]>;
-  /**  condition must be true for all nodes  */
-  tasks_every?: InputMaybe<TaskWhereInput>;
-  /**  condition must be false for all nodes  */
-  tasks_none?: InputMaybe<TaskWhereInput>;
-  /**  condition must be true for at least 1 node  */
-  tasks_some?: InputMaybe<TaskWhereInput>;
+  id?: InputMaybe<IdFilter>;
+  name?: InputMaybe<StringFilter>;
+  tasks?: InputMaybe<TaskManyRelationFilter>;
 };
 
 export type SectionWhereUniqueInput = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
+  name?: InputMaybe<Scalars["String"]>;
 };
 
-export type SectionsCreateInput = {
-  data?: InputMaybe<SectionCreateInput>;
+export type StringFilter = {
+  contains?: InputMaybe<Scalars["String"]>;
+  endsWith?: InputMaybe<Scalars["String"]>;
+  equals?: InputMaybe<Scalars["String"]>;
+  gt?: InputMaybe<Scalars["String"]>;
+  gte?: InputMaybe<Scalars["String"]>;
+  in?: InputMaybe<Array<Scalars["String"]>>;
+  lt?: InputMaybe<Scalars["String"]>;
+  lte?: InputMaybe<Scalars["String"]>;
+  mode?: InputMaybe<QueryMode>;
+  not?: InputMaybe<NestedStringFilter>;
+  notIn?: InputMaybe<Array<Scalars["String"]>>;
+  startsWith?: InputMaybe<Scalars["String"]>;
 };
 
-export type SectionsUpdateInput = {
-  data?: InputMaybe<SectionUpdateInput>;
-  id: Scalars["ID"];
-};
-
-export enum SortBoardsBy {
-  IdAsc = "id_ASC",
-  IdDesc = "id_DESC",
-  NameAsc = "name_ASC",
-  NameDesc = "name_DESC",
-  SectionAsc = "section_ASC",
-  SectionDesc = "section_DESC",
-}
-
-export enum SortSectionsBy {
-  BoardAsc = "board_ASC",
-  BoardDesc = "board_DESC",
-  IdAsc = "id_ASC",
-  IdDesc = "id_DESC",
-  NameAsc = "name_ASC",
-  NameDesc = "name_DESC",
-  TasksAsc = "tasks_ASC",
-  TasksDesc = "tasks_DESC",
-}
-
-export enum SortTasksBy {
-  DescriptionAsc = "description_ASC",
-  DescriptionDesc = "description_DESC",
-  IdAsc = "id_ASC",
-  IdDesc = "id_DESC",
-  SectionAsc = "section_ASC",
-  SectionDesc = "section_DESC",
-  TitleAsc = "title_ASC",
-  TitleDesc = "title_DESC",
-}
-
-export enum SortUsersBy {
-  EmailAsc = "email_ASC",
-  EmailDesc = "email_DESC",
-  IdAsc = "id_ASC",
-  IdDesc = "id_DESC",
-  IsAdminAsc = "isAdmin_ASC",
-  IsAdminDesc = "isAdmin_DESC",
-  MagicAuthIssuedAtAsc = "magicAuthIssuedAt_ASC",
-  MagicAuthIssuedAtDesc = "magicAuthIssuedAt_DESC",
-  MagicAuthRedeemedAtAsc = "magicAuthRedeemedAt_ASC",
-  MagicAuthRedeemedAtDesc = "magicAuthRedeemedAt_DESC",
-  NameAsc = "name_ASC",
-  NameDesc = "name_DESC",
-  PasswordResetIssuedAtAsc = "passwordResetIssuedAt_ASC",
-  PasswordResetIssuedAtDesc = "passwordResetIssuedAt_DESC",
-  PasswordResetRedeemedAtAsc = "passwordResetRedeemedAt_ASC",
-  PasswordResetRedeemedAtDesc = "passwordResetRedeemedAt_DESC",
-}
-
-/**  A keystone list  */
 export type Task = {
   __typename?: "Task";
+  assignedTo?: Maybe<Array<Member>>;
+  assignedToCount?: Maybe<Scalars["Int"]>;
   description?: Maybe<Scalars["String"]>;
   id: Scalars["ID"];
+  isComplete?: Maybe<Scalars["Boolean"]>;
+  priority?: Maybe<TaskPriorityType>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
   section?: Maybe<Section>;
   title?: Maybe<Scalars["String"]>;
 };
 
+export type TaskAssignedToArgs = {
+  orderBy?: Array<MemberOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: MemberWhereInput;
+};
+
+export type TaskAssignedToCountArgs = {
+  where?: MemberWhereInput;
+};
+
 export type TaskCreateInput = {
+  assignedTo?: InputMaybe<MemberRelateToManyForCreateInput>;
   description?: InputMaybe<Scalars["String"]>;
-  section?: InputMaybe<SectionRelateToOneInput>;
+  isComplete?: InputMaybe<Scalars["Boolean"]>;
+  priority?: InputMaybe<TaskPriorityType>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+  section?: InputMaybe<SectionRelateToOneForCreateInput>;
   title?: InputMaybe<Scalars["String"]>;
 };
 
-export type TaskRelateToManyInput = {
-  connect?: InputMaybe<Array<InputMaybe<TaskWhereUniqueInput>>>;
-  create?: InputMaybe<Array<InputMaybe<TaskCreateInput>>>;
-  disconnect?: InputMaybe<Array<InputMaybe<TaskWhereUniqueInput>>>;
-  disconnectAll?: InputMaybe<Scalars["Boolean"]>;
+export type TaskManyRelationFilter = {
+  every?: InputMaybe<TaskWhereInput>;
+  none?: InputMaybe<TaskWhereInput>;
+  some?: InputMaybe<TaskWhereInput>;
+};
+
+export type TaskOrderByInput = {
+  description?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  isComplete?: InputMaybe<OrderDirection>;
+  priority?: InputMaybe<OrderDirection>;
+  publishedAt?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+};
+
+export enum TaskPriorityType {
+  High = "high",
+  Low = "low",
+  Medium = "medium",
+}
+
+export type TaskPriorityTypeNullableFilter = {
+  equals?: InputMaybe<TaskPriorityType>;
+  in?: InputMaybe<Array<TaskPriorityType>>;
+  not?: InputMaybe<TaskPriorityTypeNullableFilter>;
+  notIn?: InputMaybe<Array<TaskPriorityType>>;
+};
+
+export type TaskRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<TaskWhereUniqueInput>>;
+  create?: InputMaybe<Array<TaskCreateInput>>;
+};
+
+export type TaskRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<TaskWhereUniqueInput>>;
+  create?: InputMaybe<Array<TaskCreateInput>>;
+  disconnect?: InputMaybe<Array<TaskWhereUniqueInput>>;
+  set?: InputMaybe<Array<TaskWhereUniqueInput>>;
+};
+
+export type TaskUpdateArgs = {
+  data: TaskUpdateInput;
+  where: TaskWhereUniqueInput;
 };
 
 export type TaskUpdateInput = {
+  assignedTo?: InputMaybe<MemberRelateToManyForUpdateInput>;
   description?: InputMaybe<Scalars["String"]>;
-  section?: InputMaybe<SectionRelateToOneInput>;
+  isComplete?: InputMaybe<Scalars["Boolean"]>;
+  priority?: InputMaybe<TaskPriorityType>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+  section?: InputMaybe<SectionRelateToOneForUpdateInput>;
   title?: InputMaybe<Scalars["String"]>;
 };
 
 export type TaskWhereInput = {
-  AND?: InputMaybe<Array<InputMaybe<TaskWhereInput>>>;
-  OR?: InputMaybe<Array<InputMaybe<TaskWhereInput>>>;
-  description?: InputMaybe<Scalars["String"]>;
-  description_contains?: InputMaybe<Scalars["String"]>;
-  description_contains_i?: InputMaybe<Scalars["String"]>;
-  description_ends_with?: InputMaybe<Scalars["String"]>;
-  description_ends_with_i?: InputMaybe<Scalars["String"]>;
-  description_i?: InputMaybe<Scalars["String"]>;
-  description_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  description_not?: InputMaybe<Scalars["String"]>;
-  description_not_contains?: InputMaybe<Scalars["String"]>;
-  description_not_contains_i?: InputMaybe<Scalars["String"]>;
-  description_not_ends_with?: InputMaybe<Scalars["String"]>;
-  description_not_ends_with_i?: InputMaybe<Scalars["String"]>;
-  description_not_i?: InputMaybe<Scalars["String"]>;
-  description_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  description_not_starts_with?: InputMaybe<Scalars["String"]>;
-  description_not_starts_with_i?: InputMaybe<Scalars["String"]>;
-  description_starts_with?: InputMaybe<Scalars["String"]>;
-  description_starts_with_i?: InputMaybe<Scalars["String"]>;
-  id?: InputMaybe<Scalars["ID"]>;
-  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  id_not?: InputMaybe<Scalars["ID"]>;
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  AND?: InputMaybe<Array<TaskWhereInput>>;
+  NOT?: InputMaybe<Array<TaskWhereInput>>;
+  OR?: InputMaybe<Array<TaskWhereInput>>;
+  assignedTo?: InputMaybe<MemberManyRelationFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  isComplete?: InputMaybe<BooleanFilter>;
+  priority?: InputMaybe<TaskPriorityTypeNullableFilter>;
+  publishedAt?: InputMaybe<DateTimeNullableFilter>;
   section?: InputMaybe<SectionWhereInput>;
-  section_is_null?: InputMaybe<Scalars["Boolean"]>;
-  title?: InputMaybe<Scalars["String"]>;
-  title_contains?: InputMaybe<Scalars["String"]>;
-  title_contains_i?: InputMaybe<Scalars["String"]>;
-  title_ends_with?: InputMaybe<Scalars["String"]>;
-  title_ends_with_i?: InputMaybe<Scalars["String"]>;
-  title_i?: InputMaybe<Scalars["String"]>;
-  title_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  title_not?: InputMaybe<Scalars["String"]>;
-  title_not_contains?: InputMaybe<Scalars["String"]>;
-  title_not_contains_i?: InputMaybe<Scalars["String"]>;
-  title_not_ends_with?: InputMaybe<Scalars["String"]>;
-  title_not_ends_with_i?: InputMaybe<Scalars["String"]>;
-  title_not_i?: InputMaybe<Scalars["String"]>;
-  title_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  title_not_starts_with?: InputMaybe<Scalars["String"]>;
-  title_not_starts_with_i?: InputMaybe<Scalars["String"]>;
-  title_starts_with?: InputMaybe<Scalars["String"]>;
-  title_starts_with_i?: InputMaybe<Scalars["String"]>;
+  title?: InputMaybe<StringFilter>;
 };
 
 export type TaskWhereUniqueInput = {
-  id: Scalars["ID"];
+  id?: InputMaybe<Scalars["ID"]>;
+  title?: InputMaybe<Scalars["String"]>;
 };
 
-export type TasksCreateInput = {
-  data?: InputMaybe<TaskCreateInput>;
-};
-
-export type TasksUpdateInput = {
-  data?: InputMaybe<TaskUpdateInput>;
-  id: Scalars["ID"];
-};
-
-/**  A keystone list  */
 export type User = {
   __typename?: "User";
+  board?: Maybe<Array<Board>>;
+  boardCount?: Maybe<Scalars["Int"]>;
   email?: Maybe<Scalars["String"]>;
   id: Scalars["ID"];
   isAdmin?: Maybe<Scalars["Boolean"]>;
-  magicAuthIssuedAt?: Maybe<Scalars["String"]>;
-  magicAuthRedeemedAt?: Maybe<Scalars["String"]>;
-  magicAuthToken_is_set?: Maybe<Scalars["Boolean"]>;
+  member?: Maybe<Array<Member>>;
+  memberCount?: Maybe<Scalars["Int"]>;
   name?: Maybe<Scalars["String"]>;
-  passwordResetIssuedAt?: Maybe<Scalars["String"]>;
-  passwordResetRedeemedAt?: Maybe<Scalars["String"]>;
-  passwordResetToken_is_set?: Maybe<Scalars["Boolean"]>;
-  password_is_set?: Maybe<Scalars["Boolean"]>;
+  password?: Maybe<PasswordState>;
+};
+
+export type UserBoardArgs = {
+  orderBy?: Array<BoardOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: BoardWhereInput;
+};
+
+export type UserBoardCountArgs = {
+  where?: BoardWhereInput;
+};
+
+export type UserMemberArgs = {
+  orderBy?: Array<MemberOrderByInput>;
+  skip?: Scalars["Int"];
+  take?: InputMaybe<Scalars["Int"]>;
+  where?: MemberWhereInput;
+};
+
+export type UserMemberCountArgs = {
+  where?: MemberWhereInput;
 };
 
 export type UserAuthenticationWithPasswordFailure = {
   __typename?: "UserAuthenticationWithPasswordFailure";
-  code: PasswordAuthErrorCode;
   message: Scalars["String"];
 };
 
@@ -793,283 +879,59 @@ export type UserAuthenticationWithPasswordSuccess = {
 };
 
 export type UserCreateInput = {
+  board?: InputMaybe<BoardRelateToManyForCreateInput>;
   email?: InputMaybe<Scalars["String"]>;
   isAdmin?: InputMaybe<Scalars["Boolean"]>;
-  magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
-  magicAuthToken?: InputMaybe<Scalars["String"]>;
+  member?: InputMaybe<MemberRelateToManyForCreateInput>;
   name?: InputMaybe<Scalars["String"]>;
   password?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
-  passwordResetToken?: InputMaybe<Scalars["String"]>;
+};
+
+export type UserOrderByInput = {
+  email?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  isAdmin?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+};
+
+export type UserRelateToOneForCreateInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  create?: InputMaybe<UserCreateInput>;
+};
+
+export type UserRelateToOneForUpdateInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  create?: InputMaybe<UserCreateInput>;
+  disconnect?: InputMaybe<Scalars["Boolean"]>;
+};
+
+export type UserUpdateArgs = {
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
 };
 
 export type UserUpdateInput = {
+  board?: InputMaybe<BoardRelateToManyForUpdateInput>;
   email?: InputMaybe<Scalars["String"]>;
   isAdmin?: InputMaybe<Scalars["Boolean"]>;
-  magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
-  magicAuthToken?: InputMaybe<Scalars["String"]>;
+  member?: InputMaybe<MemberRelateToManyForUpdateInput>;
   name?: InputMaybe<Scalars["String"]>;
   password?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
-  passwordResetToken?: InputMaybe<Scalars["String"]>;
 };
 
 export type UserWhereInput = {
-  AND?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
-  OR?: InputMaybe<Array<InputMaybe<UserWhereInput>>>;
-  email?: InputMaybe<Scalars["String"]>;
-  email_contains?: InputMaybe<Scalars["String"]>;
-  email_contains_i?: InputMaybe<Scalars["String"]>;
-  email_ends_with?: InputMaybe<Scalars["String"]>;
-  email_ends_with_i?: InputMaybe<Scalars["String"]>;
-  email_i?: InputMaybe<Scalars["String"]>;
-  email_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  email_not?: InputMaybe<Scalars["String"]>;
-  email_not_contains?: InputMaybe<Scalars["String"]>;
-  email_not_contains_i?: InputMaybe<Scalars["String"]>;
-  email_not_ends_with?: InputMaybe<Scalars["String"]>;
-  email_not_ends_with_i?: InputMaybe<Scalars["String"]>;
-  email_not_i?: InputMaybe<Scalars["String"]>;
-  email_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  email_not_starts_with?: InputMaybe<Scalars["String"]>;
-  email_not_starts_with_i?: InputMaybe<Scalars["String"]>;
-  email_starts_with?: InputMaybe<Scalars["String"]>;
-  email_starts_with_i?: InputMaybe<Scalars["String"]>;
-  id?: InputMaybe<Scalars["ID"]>;
-  id_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  id_not?: InputMaybe<Scalars["ID"]>;
-  id_not_in?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
-  isAdmin?: InputMaybe<Scalars["Boolean"]>;
-  isAdmin_not?: InputMaybe<Scalars["Boolean"]>;
-  magicAuthIssuedAt?: InputMaybe<Scalars["String"]>;
-  magicAuthIssuedAt_gt?: InputMaybe<Scalars["String"]>;
-  magicAuthIssuedAt_gte?: InputMaybe<Scalars["String"]>;
-  magicAuthIssuedAt_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  magicAuthIssuedAt_lt?: InputMaybe<Scalars["String"]>;
-  magicAuthIssuedAt_lte?: InputMaybe<Scalars["String"]>;
-  magicAuthIssuedAt_not?: InputMaybe<Scalars["String"]>;
-  magicAuthIssuedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  magicAuthRedeemedAt?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt_gt?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt_gte?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  magicAuthRedeemedAt_lt?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt_lte?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt_not?: InputMaybe<Scalars["String"]>;
-  magicAuthRedeemedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  magicAuthToken_is_set?: InputMaybe<Scalars["Boolean"]>;
-  name?: InputMaybe<Scalars["String"]>;
-  name_contains?: InputMaybe<Scalars["String"]>;
-  name_contains_i?: InputMaybe<Scalars["String"]>;
-  name_ends_with?: InputMaybe<Scalars["String"]>;
-  name_ends_with_i?: InputMaybe<Scalars["String"]>;
-  name_i?: InputMaybe<Scalars["String"]>;
-  name_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  name_not?: InputMaybe<Scalars["String"]>;
-  name_not_contains?: InputMaybe<Scalars["String"]>;
-  name_not_contains_i?: InputMaybe<Scalars["String"]>;
-  name_not_ends_with?: InputMaybe<Scalars["String"]>;
-  name_not_ends_with_i?: InputMaybe<Scalars["String"]>;
-  name_not_i?: InputMaybe<Scalars["String"]>;
-  name_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  name_not_starts_with?: InputMaybe<Scalars["String"]>;
-  name_not_starts_with_i?: InputMaybe<Scalars["String"]>;
-  name_starts_with?: InputMaybe<Scalars["String"]>;
-  name_starts_with_i?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt_gt?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt_gte?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  passwordResetIssuedAt_lt?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt_lte?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt_not?: InputMaybe<Scalars["String"]>;
-  passwordResetIssuedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  passwordResetRedeemedAt?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt_gt?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt_gte?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  passwordResetRedeemedAt_lt?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt_lte?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt_not?: InputMaybe<Scalars["String"]>;
-  passwordResetRedeemedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
-  passwordResetToken_is_set?: InputMaybe<Scalars["Boolean"]>;
-  password_is_set?: InputMaybe<Scalars["Boolean"]>;
+  AND?: InputMaybe<Array<UserWhereInput>>;
+  NOT?: InputMaybe<Array<UserWhereInput>>;
+  OR?: InputMaybe<Array<UserWhereInput>>;
+  board?: InputMaybe<BoardManyRelationFilter>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IdFilter>;
+  isAdmin?: InputMaybe<BooleanFilter>;
+  member?: InputMaybe<MemberManyRelationFilter>;
+  name?: InputMaybe<StringFilter>;
 };
 
 export type UserWhereUniqueInput = {
-  id: Scalars["ID"];
-};
-
-export type UsersCreateInput = {
-  data?: InputMaybe<UserCreateInput>;
-};
-
-export type UsersUpdateInput = {
-  data?: InputMaybe<UserUpdateInput>;
-  id: Scalars["ID"];
-};
-
-export type _ListAccess = {
-  __typename?: "_ListAccess";
-  /**
-   * Access Control settings for the currently logged in (or anonymous)
-   * user when performing 'auth' operations.
-   */
-  auth?: Maybe<Scalars["JSON"]>;
-  /**
-   * Access Control settings for the currently logged in (or anonymous)
-   * user when performing 'create' operations.
-   * NOTE: 'create' can only return a Boolean.
-   * It is not possible to specify a declarative Where clause for this
-   * operation
-   */
-  create?: Maybe<Scalars["Boolean"]>;
-  /**
-   * Access Control settings for the currently logged in (or anonymous)
-   * user when performing 'delete' operations.
-   */
-  delete?: Maybe<Scalars["JSON"]>;
-  /**
-   * Access Control settings for the currently logged in (or anonymous)
-   * user when performing 'read' operations.
-   */
-  read?: Maybe<Scalars["JSON"]>;
-  /**
-   * Access Control settings for the currently logged in (or anonymous)
-   * user when performing 'update' operations.
-   */
-  update?: Maybe<Scalars["JSON"]>;
-};
-
-export type _ListInputTypes = {
-  __typename?: "_ListInputTypes";
-  /** Create mutation input type name */
-  createInput?: Maybe<Scalars["String"]>;
-  /** Create many mutation input type name */
-  createManyInput?: Maybe<Scalars["String"]>;
-  /** Update mutation name input */
-  updateInput?: Maybe<Scalars["String"]>;
-  /** Update many mutation name input */
-  updateManyInput?: Maybe<Scalars["String"]>;
-  /** Input type for matching multiple items */
-  whereInput?: Maybe<Scalars["String"]>;
-  /** Input type for matching a unique item */
-  whereUniqueInput?: Maybe<Scalars["String"]>;
-};
-
-export type _ListMeta = {
-  __typename?: "_ListMeta";
-  /** Access control configuration for the currently authenticated request */
-  access?: Maybe<_ListAccess>;
-  /** The list's user-facing description */
-  description?: Maybe<Scalars["String"]>;
-  /** The Keystone list key */
-  key?: Maybe<Scalars["String"]>;
-  /** The list's display name in the Admin UI */
-  label?: Maybe<Scalars["String"]>;
-  /**
-   * The Keystone List name
-   * @deprecated Use `key` instead
-   */
-  name?: Maybe<Scalars["String"]>;
-  /** The list's data path */
-  path?: Maybe<Scalars["String"]>;
-  /** The list's plural display name */
-  plural?: Maybe<Scalars["String"]>;
-  /** Information on the generated GraphQL schema */
-  schema?: Maybe<_ListSchema>;
-  /** The list's singular display name */
-  singular?: Maybe<Scalars["String"]>;
-};
-
-export type _ListMutations = {
-  __typename?: "_ListMutations";
-  /** Create mutation name */
-  create?: Maybe<Scalars["String"]>;
-  /** Create many mutation name */
-  createMany?: Maybe<Scalars["String"]>;
-  /** Delete mutation name */
-  delete?: Maybe<Scalars["String"]>;
-  /** Delete many mutation name */
-  deleteMany?: Maybe<Scalars["String"]>;
-  /** Update mutation name */
-  update?: Maybe<Scalars["String"]>;
-  /** Update many mutation name */
-  updateMany?: Maybe<Scalars["String"]>;
-};
-
-export type _ListQueries = {
-  __typename?: "_ListQueries";
-  /** Single-item query name */
-  item?: Maybe<Scalars["String"]>;
-  /** All-items query name */
-  list?: Maybe<Scalars["String"]>;
-  /** List metadata query name */
-  meta?: Maybe<Scalars["String"]>;
-};
-
-export type _ListSchema = {
-  __typename?: "_ListSchema";
-  /** Information about fields defined on this list */
-  fields?: Maybe<Array<Maybe<_ListSchemaFields>>>;
-  /** Top-level GraphQL input types */
-  inputTypes?: Maybe<_ListInputTypes>;
-  /** Top-level GraphQL mutation names */
-  mutations?: Maybe<_ListMutations>;
-  /**
-   * Top level GraphQL query names which either return this type, or
-   * provide aggregate information about this type
-   */
-  queries?: Maybe<_ListQueries>;
-  /**
-   * Information about fields on other types which return this type, or
-   * provide aggregate information about this type
-   */
-  relatedFields?: Maybe<Array<Maybe<_ListSchemaRelatedFields>>>;
-  /** The typename as used in GraphQL queries */
-  type?: Maybe<Scalars["String"]>;
-};
-
-export type _ListSchemaFieldsArgs = {
-  where?: InputMaybe<_ListSchemaFieldsInput>;
-};
-
-export type _ListSchemaFields = {
-  __typename?: "_ListSchemaFields";
-  /**
-   * The name of the field in its list
-   * @deprecated Use `path` instead
-   */
-  name?: Maybe<Scalars["String"]>;
-  /** The path of the field in its list */
-  path?: Maybe<Scalars["String"]>;
-  /** The field type (ie, Checkbox, Text, etc) */
-  type?: Maybe<Scalars["String"]>;
-};
-
-export type _ListSchemaFieldsInput = {
-  type?: InputMaybe<Scalars["String"]>;
-};
-
-export type _ListSchemaRelatedFields = {
-  __typename?: "_ListSchemaRelatedFields";
-  /** A list of GraphQL field names */
-  fields?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  /** The typename as used in GraphQL queries */
-  type?: Maybe<Scalars["String"]>;
-};
-
-export type _QueryMeta = {
-  __typename?: "_QueryMeta";
-  count?: Maybe<Scalars["Int"]>;
-};
-
-export type _KsListsMetaInput = {
-  /** Whether this is an auxiliary helper list */
-  auxiliary?: InputMaybe<Scalars["Boolean"]>;
-  key?: InputMaybe<Scalars["String"]>;
+  email?: InputMaybe<Scalars["String"]>;
+  id?: InputMaybe<Scalars["ID"]>;
 };

@@ -1,5 +1,5 @@
 mutation deleteSection($id: ID!) {
-  deleteSection(id: $id) {
+  deleteSection(where: { id: $id }) {
     id
     name
   }

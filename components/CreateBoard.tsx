@@ -6,12 +6,12 @@ import DisplayError from "./ErrorMessage";
 
 function CreateBoard() {
   const { inputs, handleChange, resetForm } = useForm({
-    name: "",
+    board_name: "",
   });
 
   const [createBoard, { loading, error }] = useCreateBoardMutation({
     variables: {
-      name: inputs.name!,
+      name: inputs.board_name!,
     },
     refetchQueries: [refetchBoardsQuery()],
   });
@@ -49,7 +49,7 @@ function CreateBoard() {
                     id="name"
                     disabled={loading}
                     placeholder="Enter the name of the Board"
-                    value={inputs.name}
+                    value={inputs.board_name}
                     onChange={handleChange}
                     required
                     className="textfield"

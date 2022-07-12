@@ -1,3 +1,4 @@
+import PleaseSignIn from "../../components/PleaseSignIn";
 import Section from "../../components/Section";
 
 type BoardPageProps = {
@@ -9,7 +10,9 @@ type BoardPageProps = {
 function IndexPage({ query }: BoardPageProps) {
   return (
     <div>
-      <Section id={query.id} />
+      <PleaseSignIn>
+        <Section id={query.id} />
+      </PleaseSignIn>
     </div>
   );
 }

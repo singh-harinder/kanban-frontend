@@ -1,5 +1,6 @@
 import Head from "next/head";
 import CreateSection from "../components/CreateSection";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 interface SectionPageProps {
   query: {
@@ -13,7 +14,9 @@ function SectionPage({ query }: SectionPageProps) {
       <Head>
         <title>Kanban | Create a new section</title>
       </Head>
-      <CreateSection id={query.id} />
+      <PleaseSignIn>
+        <CreateSection id={query.id} />
+      </PleaseSignIn>
     </div>
   );
 }

@@ -6,13 +6,13 @@ import DisplayError from "./ErrorMessage";
 
 function CreateSection({ id }: { id: string }) {
   const { inputs, handleChange, resetForm } = useForm({
-    name: "",
+    section_name: "",
     board: "",
   });
 
   const [createSection, { loading, error }] = useCreateSectionMutation({
     variables: {
-      name: inputs.name!,
+      name: inputs.section_name!,
       board: id,
     },
     refetchQueries: [refetchSectionsQuery(), refetchBoardsQuery()],
@@ -51,7 +51,7 @@ function CreateSection({ id }: { id: string }) {
                     id="name"
                     disabled={loading}
                     placeholder="Enter the name of the section"
-                    value={inputs.name}
+                    value={inputs.section_name}
                     onChange={handleChange}
                     required
                     className="textfield"

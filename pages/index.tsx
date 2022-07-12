@@ -1,9 +1,12 @@
 import Board from "../components/Board";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 function IndexPage() {
   return (
     <div>
-      <Board />
+      {/* <PleaseSignIn>
+        <Board />
+      </PleaseSignIn> */}
     </div>
   );
 }

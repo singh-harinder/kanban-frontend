@@ -1,10 +1,18 @@
 query Tasks {
-  allTasks {
+  tasks {
     id
     title
     description
     section {
       name
     }
+    priority
+    publishedAt
+    isComplete
+    assignedTo {
+      id
+      name
+    }
+    assignedToCount
   }
 }

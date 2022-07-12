@@ -1,5 +1,6 @@
 import Head from "next/head";
 import CreateTask from "../../components/CreateTask";
+import PleaseSignIn from "../../components/PleaseSignIn";
 
 type TaskPageProps = {
   query: {
@@ -13,7 +14,9 @@ function TaskPage({ query }: TaskPageProps) {
       <Head>
         <title>Kanban | Add a new Task</title>
       </Head>
-      <CreateTask sectionId={query.id} />
+      <PleaseSignIn>
+        <CreateTask sectionId={query.id} />
+      </PleaseSignIn>
     </div>
   );
 }

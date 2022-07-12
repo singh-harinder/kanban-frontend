@@ -1,5 +1,5 @@
 mutation deleteBoard($id: ID!) {
-  deleteBoard(id: $id) {
+  deleteBoard(where: { id: $id }) {
     id
     name
   }

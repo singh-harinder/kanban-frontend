@@ -7,15 +7,21 @@ type TaskInputs = {
 };
 
 type UserInputs = {
-  name?: string;
+  username?: string;
+  email?: string;
+  password?: string;
 };
 
 type SectionInputs = {
-  name?: string;
+  section_name?: string;
   board?: string;
 };
 
-type Inputs = TaskInputs & UserInputs & SectionInputs;
+type BoardInputs = {
+  board_name?: string;
+};
+
+type Inputs = TaskInputs & UserInputs & SectionInputs & BoardInputs;
 
 type InputTypes = {
   name: string;

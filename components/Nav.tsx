@@ -12,18 +12,25 @@ function Nav() {
 
   return (
     <div>
-      <nav className="mt-10 mb-10 hidden md:block">
-        <ul className="flex -skew-x-6 justify-around p-4 text-2xl font-bold uppercase">
-          {/* <li className="hover:text-custompurple">
-            <Link href="/board">Create a new Board</Link>
-          </li> */}
-          <li className="hover:text-custompurple">
-            <Link href="/createsection">Create a new Section</Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="m-0 flex h-full w-full flex-col bg-white shadow-lg">
+        <div className="relative m-2 flex items-center justify-center border-b-4 p-10  text-2xl font-extrabold">
+          <Link href="/">Kanban</Link>
+        </div>
+        <div className="relative m-2 flex flex-col items-center justify-center text-[#94a3b8]">
+          <div className="p-2">
+            <Link href="/">Board </Link>
+          </div>
+          <div className="p-2">
+            <Link href="/">About</Link>
+          </div>
+          <div className="p-2">
+            <Link href="/">Page</Link>
+          </div>
+        </div>
+      </div>
+
       {/*  */}
-      <div className="flex cursor-pointer justify-center md:hidden">
+      {/* <div className="flex cursor-pointer justify-center md:hidden">
         <button type="button" className="mt-4" onClick={() => setIsOpen(!isOpen)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,18 +47,15 @@ function Nav() {
       {isOpen && (
         <nav className="mt-2 mb-10 p-2 font-bold uppercase sm:block md:hidden">
           <ul>
-            {/* <li className="flex justify-center p-2 hover:text-custompurple">
+            <li className="flex justify-center p-2 hover:text-custompurple">
               <Link href="/board">Create a new Board</Link>
-            </li> */}
+            </li>
             <li className="flex justify-center p-2 hover:text-custompurple">
               <Link href="/createsection">Create a new Section</Link>
             </li>
-            {/* <li className="flex justify-center p-2 hover:text-custompurple">
-              <Link href="/task">Add a new Task</Link>
-            </li> */}
           </ul>
         </nav>
-      )}
+      )} */}
     </div>
   );
 }

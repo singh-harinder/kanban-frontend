@@ -16,9 +16,9 @@ function EditTask({ id }: { id: string }) {
   });
 
   const { inputs, handleChange, resetForm } = useForm({
-    title: data?.Task?.title || "",
-    description: data?.Task?.description || "",
-    section: data?.Task?.section?.id || "",
+    title: data?.task?.title || "",
+    description: data?.task?.description || "",
+    section: data?.task?.section?.id || "",
   });
 
   const [updateTask, { loading: updateLoading, error: updateError }] = useUpdateTaskMutation();
@@ -33,7 +33,7 @@ function EditTask({ id }: { id: string }) {
     await updateTask({
       variables: {
         id: id,
-        sectionID: data?.Task?.section?.id || "",
+        sectionID: data?.task?.section?.id || "",
         description: inputs.description,
         title: inputs.title,
       },

@@ -1,5 +1,5 @@
 mutation deleteTask($id: ID!) {
-  deleteTask(id: $id) {
+  deleteTask(where: { id: $id }) {
     id
     title
   }

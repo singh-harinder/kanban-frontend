@@ -1,5 +1,5 @@
 query singleTask($id: ID!) {
-  Task(where: { id: $id }) {
+  task(where: { id: $id }) {
     id
     title
     description

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import CreateBoard from "../components/CreateBoard";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 function SectionPage() {
   return (
@@ -7,7 +8,9 @@ function SectionPage() {
       <Head>
         <title>Kanban | Create a new Board</title>
       </Head>
-      <CreateBoard />
+      <PleaseSignIn>
+        <CreateBoard />
+      </PleaseSignIn>
     </div>
   );
 }

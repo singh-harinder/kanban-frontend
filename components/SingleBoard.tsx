@@ -29,7 +29,7 @@ function SingleBoard(board: BoardProps) {
   }
 
   return (
-    <div className="relative rounded-xl bg-white p-4">
+    <div className="relative p-4">
       <Link href={`/board/${board.board?.id}`}>
         <p className="flex cursor-pointer justify-center border-b-4 border-b-slate-700 p-4">{board.board?.name}</p>
       </Link>

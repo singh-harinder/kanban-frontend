@@ -4,9 +4,14 @@ import { getDataFromTree } from "@apollo/client/react/ssr";
 import { createUploadLink } from "apollo-upload-client";
 import withApollo from "next-with-apollo";
 import type { IncomingHttpHeaders } from "http";
+import getConfig from "next/config";
 
-const NEXT_PUBLIC_DEVELOPMENT_ENDPOINT = process.env.NEXT_PUBLIC_DEVELOPMENT_ENDPOINT;
-const NEXT_PUBLIC_PRODUCTION_ENDPOINT = process.env.NEXT_PUBLIC_PRODUCTION_ENDPOINT;
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+// const NEXT_PUBLIC_DEVELOPMENT_ENDPOINT = process.env.NEXT_PUBLIC_DEVELOPMENT_ENDPOINT;
+// const NEXT_PUBLIC_PRODUCTION_ENDPOINT = process.env.NEXT_PUBLIC_PRODUCTION_ENDPOINT;
+const NEXT_PUBLIC_DEVELOPMENT_ENDPOINT = serverRuntimeConfig.apiURL || publicRuntimeConfig.apiURL;
+const NEXT_PUBLIC_PRODUCTION_ENDPOINT = serverRuntimeConfig.apiURL || publicRuntimeConfig.apiURL;
 
 function createClient({ headers, initialState }: { headers?: IncomingHttpHeaders | undefined; initialState?: any }) {
   return new ApolloClient({

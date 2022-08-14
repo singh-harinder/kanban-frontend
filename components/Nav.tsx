@@ -13,18 +13,47 @@ function Nav() {
   return (
     <div>
       <div className="m-0 flex h-full w-full flex-col bg-white shadow-lg">
-        <div className="relative m-2 flex items-center justify-center border-b-4 p-10  text-2xl font-extrabold">
+        <div className="relative m-2 flex items-center justify-start border-b-4 p-4 text-2xl font-extrabold">
           <Link href="/">Kanban</Link>
         </div>
-        <div className="relative m-2 flex flex-col items-center justify-center text-[#94a3b8]">
-          <div className="p-2">
-            <Link href="/">Board </Link>
+        <div className="relative m-2 flex flex-col items-start justify-start border-b-4 text-[#94a3b8]">
+          <div className="p-2 hover:text-custompurple">
+            <Link href="/">Home</Link>
           </div>
-          <div className="p-2">
-            <Link href="/">About</Link>
+          <div className="p-2 hover:text-custompurple">
+            <Link href="/">My Tasks</Link>
           </div>
-          <div className="p-2">
-            <Link href="/">Page</Link>
+          <div className="p-2 hover:text-custompurple">
+            <Link href="/">Profile</Link>
+          </div>
+        </div>
+        {/*  */}
+        <div className="flex flex-col border-b-4">
+          <div className="relative flex items-start justify-between p-4 text-[#94a3b8]">
+            <span>Board</span>
+            <Link href="/createboard">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 cursor-pointer hover:text-custompurple"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </Link>
+          </div>
+          <div className="mt-4 p-1">
+            {user.data?.authenticatedItem?.board?.map((board) => (
+              <Link href={`/board/${board.id}`} key={board.id}>
+                <a className="mt-4 flex justify-start pl-4 font-bold hover:text-custompurple">{board.name}</a>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

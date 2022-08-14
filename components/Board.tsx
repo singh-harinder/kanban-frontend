@@ -10,12 +10,12 @@ function Board() {
   if (error) return <DisplayError error={error} />;
 
   return (
-    <div className="bg-gray-200">
-      <div className="grid grid-cols-4 gap-4 p-11 shadow-md">
+    <div className="bg-white">
+      <div className="grid grid-cols-4 gap-4 p-11">
         {data?.authenticatedItem?.board?.map((board) => (
           <SingleBoard key={board?.id} board={board} />
         ))}
-        <div className="flex items-center justify-center rounded-xl bg-white p-20">
+        <div className="flex items-center justify-center rounded-xl p-20">
           <span>
             <Link href="/createboard">Create a new Board</Link>
           </span>

@@ -3,12 +3,17 @@ services:
   kanban-frontend:
     build:
       context: .
-      args:
-        - SCHEMA_ENDPOINT=http://localhost:3000/api/graphql
     ports:
       - "7777:7777"
     volumes:
       - ./:/app
       - /app/node_modules
+      - /app/.next
     environment:
-      - TAILWIND_MODE=watch
+      - SCHEMA_ENDPOINT=${SCHEMA_ENDPOINT}
+    networks:
+      - kanban-frontend-network
+
+networks:
+  kanban-frontend-network:
+    name: kanban-network
